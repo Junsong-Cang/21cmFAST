@@ -1,5 +1,5 @@
 """Build the C code with CFFI."""
-import os
+import os, platform
 from cffi import FFI
 
 ffi = FFI()
@@ -10,10 +10,19 @@ include_dirs = [CLOC]
 # =================================================================
 # Set compilation arguments dependent on environment... a bit buggy
 # =================================================================
+OS_Name = platform.system()
+
 if "DEBUG" in os.environ:
-    extra_compile_args = ["-fopenmp", "-w", "-g", "-O0", "--verbose"]
+    if OS_Name == 'Darwin':
+        extra_compile_args = ["-fopenmp", "-w", "-g", "-O0", "--verbose"]
+    else:
+        extra_compile_args = ["-w", "-g", "-O0", "--verbose"]
 else:
-    extra_compile_args = ["-fopenmp", "-Ofast", "-w", "--verbose"]
+    if OS_Name == 'Darwin':
+        extra_compile_args = ["-Ofast", "-w", "--verbose"]
+    else:
+        extra_compile_args = ["-fopenmp", "-Ofast", "-w", "--verbose"]
+
 
 # Set the C-code logging level.
 # If DEBUG is set, we default to the highest level, but if not,
