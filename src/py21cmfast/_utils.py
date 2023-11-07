@@ -397,11 +397,15 @@ class StructWithDefaults(StructWrapper):
                 setattr(self, "_" + k, v)
 
         if kwargs:
+            pass
+            '''
+            JSC: silencing warnings
             warnings.warn(
                 "The following parameters to {thisclass} are not supported: {lst}".format(
                     thisclass=self.__class__.__name__, lst=list(kwargs.keys())
                 )
             )
+            '''
 
     def convert(self, key, val):
         """Make any conversions of values before saving to the instance."""
