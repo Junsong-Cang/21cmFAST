@@ -602,7 +602,7 @@ double EoR_Rate_DM(double z, double Boost, double Delta, struct AstroParams *ast
     // ok this is somewhat inaccurate, we are not doing Helium here but we are assuming that xe is shared by H and He. should mention this in our paper
     dxe_dt = f_HIon * dEdVdt_Inj / (13.6 * Q * nH) + (1 - Peebles) * f_LyA * dEdVdt_Inj/ (10.2 * Q * nH);
 
-    ntot = nH * (1. + xe + fHe + xe * fHe); // proton, neutral He, e from H, e from He, note that He is singly ionized
+    ntot = nH * (1. + xe + fHe + xe * fHe); // Neutral H and ionized H (proton), e from H, neutral and neutral He, e from He, note that He is singly ionized
     dT_dt = f_Heat * dEdVdt_Inj * 2.0 / (3.0 * kB * ntot);
 
     dxe_dz = dxe_dt * dt_dzp;
