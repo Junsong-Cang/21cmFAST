@@ -525,7 +525,7 @@ double PeeblesFactor(double z, double xe, double Tk, double Delta)
     }
     if ((result > 1) || (result < 0))
     {
-        result = 0.0/0.0;
+        result = 0.0/0.0;//Sanity check, if not within 0-1 then give NaN
     }
     return result;
 }
@@ -556,7 +556,8 @@ double EoR_Rate_DM(double z, double Boost, double Delta, struct AstroParams *ast
 {
     /*
     Get dxe/dz and dT/dz from DM injection
-    I am doing everything in SI units
+    Doing everything in SI units
+    IMPORTANT NOTE: 21cmFAST defines xe as ne/(nH + nHe)
     ---- inputs ----
     GetIon : choose output
         0 - dT/dt
@@ -599,8 +600,8 @@ double EoR_Rate_DM(double z, double Boost, double Delta, struct AstroParams *ast
         f_LyA = (1.0 - xe)*Interp_EFF(z, astro_params->mdm, user_params->DM_ANN_Channel, 1, user_params->HMF, user_params->POWER_SPECTRUM, flag_options->USE_HALO_BOOST);
         f_Heat = Interp_EFF(z, astro_params->mdm, user_params->DM_ANN_Channel, 2, user_params->HMF, user_params->POWER_SPECTRUM, flag_options->USE_HALO_BOOST);
     }
-    // ok this is somewhat inaccurate, we are not doing Helium here but we are assuming that xe is shared by H and He. should mention this in our paper
-    dxe_dt = f_HIon * dEdVdt_Inj / (13.6 * Q * nH) + (1 - Peebles) * f_LyA * dEdVdt_Inj/ (10.2 * Q * nH);
+    // This is somewhat inaccurate, we are not doing Helium here but we are assuming that xe is shared by H and He. should mention this in our paper
+    dxe_dt = f_HIon * dEdVdt_Inj / (13.6 * Q * nH * (1+fHe)) + (1 - Peebles) * f_LyA * dEdVdt_Inj/ (10.2 * Q * nH * (1+fHe));
 
     ntot = nH * (1. + xe + fHe + xe * fHe); // Neutral H and ionized H (proton), e from H, neutral and neutral He, e from He, note that He is singly ionized
     dT_dt = f_Heat * dEdVdt_Inj * 2.0 / (3.0 * kB * ntot);
