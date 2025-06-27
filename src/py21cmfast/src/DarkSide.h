@@ -1,6 +1,6 @@
 // Halo Boost Factor module
 #define print_debug_info 0
-#define Use_Conde_Concentration 0
+#define Use_Conde_Concentration 1
 #define Boost_nmh 1000
 #define Boost_Interp_Table_Size 200
 #include "Tables.h"
@@ -121,7 +121,7 @@ double HaloProfile_Integrator(double z, double mh)
     if (Use_Conde_Concentration)
     {
         c = Halo_Concentration_Conde(mh, z);
-        printf("Using Conde concentration model\n");
+        // printf("Using Conde concentration model\n");
     }
     delta_c = Delta_C * pow(c, 3.) / (3. * (log(1. + c) - c / (1. + c)));
 
@@ -605,7 +605,7 @@ double EoR_Rate_DM(double z, double Boost, double Delta, struct AstroParams *ast
 
     ntot = nH * (1. + xe + fHe + xe * fHe); // Neutral H and ionized H (proton), e from H, neutral and neutral He, e from He, note that He is singly ionized
     dT_dt = f_Heat * dEdVdt_Inj * 2.0 / (3.0 * kB * ntot);
-
+    
     dxe_dz = dxe_dt * dt_dzp;
     dT_dz = dT_dt * dt_dzp;
 

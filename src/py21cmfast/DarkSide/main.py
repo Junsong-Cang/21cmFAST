@@ -1,10 +1,10 @@
 reload_boost = 0
-reload_EFF = 0
-print_data = 0
+reload_EFF = 1
+print_data = 1
 
 '''
-Compute deposition efficiencies from DM annihilation, this largely follows 10.1088/1475-7516/2022/03/012
-Pipeline: 
+Compute boost factor and deposition efficiency from DM annihilation, this largely follows 10.1088/1475-7516/2022/03/012
+Pipeline:
     Compute Boost factors with GetBoost
     Compute EFF with GetEFF which calls GetEFF_Kernel
     main prints out interpolation table and functions to c_products/Tables.h
@@ -27,12 +27,12 @@ def GetBoost(HMF=0, POWER_SPECTRUM=2):
     GLB_Quantities = ('brightness_temp','Ts_box','xH_box','Tk_box', 'Boost_box')
 
     user_params = p21c.UserParams(
-        HII_DIM = 100,
+        HII_DIM = 50,
         N_THREADS = 1,
         USE_INTERPOLATION_TABLES = True,
         HMF = HMF,
         POWER_SPECTRUM = POWER_SPECTRUM,
-        BOX_LEN = 1000)
+        BOX_LEN = 200)
     astro_params = p21c.AstroParams(
         Pann27 = 1,
         NU_X_THRESH = 500.0)
@@ -340,7 +340,7 @@ def main(filename = main_path + 'c_products/Tables.h'):
                     name, fc = Load_EFF_Data(spec=spec,channel=channel, HMF=HMF, PS=PS, UseBoost=1)
                     PrintData_Kernel(name=name,fc=fc,filename=filename)
     
-    # Now that we printed table definitions, let's print functions that pre[ares them for interpolation
+    # Now that we printed table definitions, let's print functions that prepares them for interpolation
     Print_C_funtion(filename)
 
 if print_data:main()
