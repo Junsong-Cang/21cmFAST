@@ -1,4 +1,4 @@
-reload_boost = 0
+reload_boost = 1
 reload_EFF = 1
 print_data = 1
 
@@ -27,7 +27,7 @@ def GetBoost(HMF=0, POWER_SPECTRUM=2):
     GLB_Quantities = ('brightness_temp','Ts_box','xH_box','Tk_box', 'Boost_box')
 
     user_params = p21c.UserParams(
-        HII_DIM = 50,
+        HII_DIM = 100,
         N_THREADS = 1,
         USE_INTERPOLATION_TABLES = True,
         HMF = HMF,
