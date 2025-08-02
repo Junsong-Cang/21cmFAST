@@ -1,6 +1,8 @@
 /*
 PBH Energy injection and deposition from 2108.13256
 Codes are a bit hacky, some functions are actually also defined in DM module, clean up later
+The initial goal was to study 21cm sensitivity to exploding PBHs, but this only seems to apply to a very narrow mass window [1.3E14, 3E14].
+And at this window kins are not very obvious so i might want to give this up, codes are kept here anyway just in case i change my mind
 */
 
 #include <stdio.h>
