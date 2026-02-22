@@ -214,7 +214,7 @@ double BoostFactor(double z, double growthf, double delta, double sigma2, struct
     // Get the boost factor all in one go, set growthf externaly to avoid repeated computations
     int idx;
     double m, dndm, lm1, lm2, dlm, lm, RhoM, RhoCr, dfcoll_dm, Halo, dHalo_dm, RhoM_grid, Ln10, HI, RhoDM, res, fcoll;
-
+    
     RhoCr = 2.775e11 * pow(cosmo_params->hlittle, 2); // Critical density, msun/Mpc^3
     RhoM = cosmo_params->OMm * RhoCr;
     RhoDM = (cosmo_params->OMm - cosmo_params->OMb) * RhoCr;
@@ -270,7 +270,7 @@ double BoostFactor(double z, double growthf, double delta, double sigma2, struct
         dHalo_dm = 4. * PI * dndm * HI / (pow(RhoDM, 2.0) * pow(1. + z, 3.));
         Halo += m * dHalo_dm * dlm * Ln10;
     }
-
+    
     res = pow(1. - fcoll, 2.) + Halo;
     
     res = fmax(1., res);
