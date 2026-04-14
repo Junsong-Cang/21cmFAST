@@ -58,7 +58,7 @@ int ComputeTsBox(float redshift, float prev_redshift, struct UserParams *user_pa
         double Trad_inv, Halo_Boost_Tab[Boost_Interp_Table_Size], Reset_MinM, Halo_Boost_User;
         double Delta_Min, Delta_Max, DM_sigmaMmax, Delta_Width, Grid_Delta, Halo_Boost_ave, dxedz_dm, dtdz_dm, j_alpha_dm;
         int idx, R_values_ready;
-
+        
         // Initialising some variables
         R_values_ready = 0;
 
@@ -2386,7 +2386,7 @@ int ComputeTsBox(float redshift, float prev_redshift, struct UserParams *user_pa
 
                                 // First let's do dxe_dzp //
                                 dxion_sink_dt = alpha_A(T) * global_params.CLUMPING_FACTOR * x_e * x_e * f_H * prefactor_1 *
-                                                (1. + curr_delNL0 * growth_factor_zp);
+                                            (1. + curr_delNL0 * growth_factor_zp);
                                 if (flag_options->USE_MINI_HALOS)
                                 {
                                     dxe_dzp = dt_dzp * (dxion_source_dt_box[box_ct] + dxion_source_dt_box_MINI[box_ct] - dxion_sink_dt);
